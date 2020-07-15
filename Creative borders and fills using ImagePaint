@@ -1,0 +1,37 @@
+In practice, this means we can modify the default text view so that it has a red background:
+
+Text("Hello World")
+    .frame(width: 300, height: 300)
+    .background(Color.red)
+Or a red border:
+
+Text("Hello World")
+    .frame(width: 300, height: 300)
+    .border(Color.red, width: 30)
+In contrast, we can use an image for the background:
+
+Text("Hello World")
+    .frame(width: 300, height: 300)
+    .background(Image("Example"))
+But using the same image as a border won’t work:
+
+Text("Hello World")
+    .frame(width: 300, height: 300)
+    .border(Image("Example"), width: 30)
+    
+    
+Text("Hello World")
+.frame(width: 300, height: 300)
+.border(ImagePaint(image: Image("Example"), scale: 0.2), width: 30)
+
+If you want to try using the sourceRect parameter, make sure you pass in a CGRect of relative sizes and positions: 0 means “start” and 1 means “end”. For example, this will show the entire width of our example image, but only the middle half:
+
+Text("Hello World")
+    .frame(width: 300, height: 300)
+    .border(ImagePaint(image: Image("Example"), sourceRect: CGRect(x: 0, y: 0.25, width: 1, height: 0.5), scale: 0.1), width: 30)
+It’s worth adding that ImagePaint can be used for view backgrounds and also shape strokes. For example, we could create a capsule with our example image tiled as its stroke:
+
+Capsule()
+    .strokeBorder(ImagePaint(image: Image("Example"), scale: 0.1), lineWidth: 20)
+    .frame(width: 300, height: 200)
+ImagePaint will automatically keep tiling its image until it has filled its area – it can work with backgrounds, strokes, borders, and fills of any size.
