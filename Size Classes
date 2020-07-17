@@ -1,0 +1,18 @@
+    @Environment(\.horizontalSizeClass) var sizeClass
+    @FetchRequest(entity: Student.entity(), sortDescriptors: []) var students: FetchedResults<Student>
+    
+    var body: some View {
+        if sizeClass == .compact {
+            return AnyView(VStack {
+                Text("Active size class:")
+                Text("COMPACT")
+            }
+            .font(.largeTitle))
+        } else {
+            return AnyView(HStack {
+                Text("Active size class:")
+                Text("REGULAR")
+            }
+            .font(.largeTitle))
+        }
+    }
