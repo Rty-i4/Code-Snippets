@@ -1,0 +1,7 @@
+If you want Core Data to write the changes, you need to open SceneDelegate.swift and add this import:
+
+import CoreData
+Now add this line in the willConnectTo method, directly below the code that starts let context:
+
+context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+That asks Core Data to merge duplicate objects based on their properties – it tries to intelligently overwrite the version in its database using properties from the new version. 
