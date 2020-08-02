@@ -1,0 +1,23 @@
+struct ContentView: View {
+    @State private var showingActinSheet = false
+    @State private var backgroundColor = Color.white
+    var body: some View {
+        VStack {
+            Text("Hello, World!")
+                .frame(width: 300, height: 300)
+            .background(backgroundColor)
+                .onTapGesture {
+                    self.showingActinSheet = true
+            }
+            .actionSheet(isPresented: $showingActinSheet) {
+                ActionSheet(title: Text("Change background"), message: Text("Select Color"), buttons: [
+                    .default(Text("Red")) { self.backgroundColor = .red},
+                    .default(Text("Green")) { self.backgroundColor = .green},
+                    .default(Text("Blue")) { self.backgroundColor = .blue},
+                    .cancel()
+                ])
+            }
+        }
+        
+    }
+}
